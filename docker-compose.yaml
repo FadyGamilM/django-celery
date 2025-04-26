@@ -1,11 +1,11 @@
 version: '3.8'
 services:
   django:
+    image: django-celery
     container_name: django_app
     build:
       context: .
       dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/usr/src/app/ # ensure  the WORKDIR in Dockerfile is /usr/src/app
     ports:

@@ -6,8 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 DEBUG = os.environ.get('DEBUG')
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(
-    ',') if os.environ.get('ALLOWED_HOSTS') else []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # Application definition
