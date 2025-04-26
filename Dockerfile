@@ -20,4 +20,4 @@ COPY . .
 
 EXPOSE 8000
 
-ENTRYPOINT [ "/usr/src/app/entrypoint.sh", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT [ "/usr/src/app/entrypoint.sh"]

@@ -12,6 +12,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/usr/src/app/ # ensure  the WORKDIR in Dockerfile is /usr/src/app
     ports:
@@ -22,3 +23,18 @@ services:
       - ALLOWED_HOSTS=localhost, 127.0.0.1
     depends_on:
       - redis
+
+  celery:
+    image: django-celery
+    container_name: celery_app
+    build:
+      context: . # local codebase will be used for both celery app and django server app 
+    command: celery --app=djangocelery worker -l INFO
+    volumes:
+      - .:/usr/src/app/ # ensure  the WORKDIR in Dockerfile is /usr/src/app
+    depends_on:
+      - redis
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=8940129401294gasgas85212dsa
+      - ALLOWED_HOSTS=localhost, 127.0.0.1
