@@ -28,3 +28,6 @@ So Celery is basically a Go routine !
     ╰─ ./manage.py startapp celeryworker
     ```
 - since that i didn't define a port and command to start the instance of code that i used in celery container .. the `manage.py` file which is the entry point won't be executed, but this file contains the main function that let the app access the environment variables .. so we will need to initiate this setup somehow and somewhere into our project and i will do this in the `celery.py` file
+
+## Communication Flow between apps : 
+![alt text](workflow.png)
