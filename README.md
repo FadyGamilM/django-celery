@@ -10,3 +10,6 @@ So Celery is basically a Go routine !
 
 ## Celery Tasks Features: 
 ![](celery-tasks-features.png)
+
+## Solution Arch:
+![](solution-arch.png)

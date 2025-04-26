@@ -1,5 +1,11 @@
 version: '3.8'
 services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379" # browser:container
+
   django:
     image: django-celery
     container_name: django_app
@@ -14,3 +20,5 @@ services:
       - DEBUG=True
       - SECRET_KEY=8940129401294gasgas85212dsa
       - ALLOWED_HOSTS=localhost, 127.0.0.1
+    depends_on:
+      - redis
