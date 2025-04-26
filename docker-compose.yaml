@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  django:
+    container_name: django_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app/ # ensure  the WORKDIR in Dockerfile is /usr/src/app
+    ports:
+      - "8000:8000" # browser:container
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=8940129401294gasgas85212dsa
+      - ALLOWED_HOSTS=localhost, 127.0.0.1
