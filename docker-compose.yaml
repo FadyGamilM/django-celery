@@ -46,7 +46,8 @@ services:
     build:
       context: ./celery-worker-svc # local codebase will be used for both celery app and django server app 
       dockerfile: ./Dockerfile
-    command: celery --app=celery worker -l INFO # --app=celery is the name of the celery file app (celery.py)
+    command: celery --app=celerytask worker -l INFO # --app=celerytask is the name of the celery file app (celery.py)
+    #! Never name it celery.py 
     volumes:
       - ./celery-worker-svc:/usr/src/app/ # ensure  the WORKDIR in Dockerfile is /usr/src/app
     depends_on:
