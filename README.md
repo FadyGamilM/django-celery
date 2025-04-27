@@ -31,3 +31,6 @@ So Celery is basically a Go routine !
 
 ## Communication Flow between apps : 
 ![alt text](workflow.png)
+
+## Routing Techniques : 
+![](routing.png)

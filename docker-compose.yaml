@@ -7,7 +7,7 @@ services:
       - "6379:6379" # browser:container
 
   django:
-    image: django-celery
+    image: django
     container_name: django_app
     build:
       context: .
@@ -40,9 +40,26 @@ services:
   #     - SECRET_KEY=8940129401294gasgas85212dsa
   #     - ALLOWED_HOSTS=localhost, 127.0.0.1
 
-  standalone_celery:
+  standalone_celery_1:
     image: celery-standalone # if you want to run a standalone celery worker and not reuse the codebase and the dockerfile of the other svcs, use a unique image name isntead of the image that is used for the django and celery services
-    container_name: celery_standalone_app
+    container_name: celery_standalone_app_1
+    build:
+      context: ./celery-worker-svc # local codebase will be used for both celery app and django server app 
+      dockerfile: ./Dockerfile
+    command: celery --app=celerytask worker -l INFO # --app=celerytask is the name of the celery file app (celery.py)
+    #! Never name it celery.py 
+    volumes:
+      - ./celery-worker-svc:/usr/src/app/ # ensure  the WORKDIR in Dockerfile is /usr/src/app
+    depends_on:
+      - redis
+      - django
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+  standalone_celery_2:
+    image: celery-standalone # if you want to run a standalone celery worker and not reuse the codebase and the dockerfile of the other svcs, use a unique image name isntead of the image that is used for the django and celery services
+    container_name: celery_standalone_app_2
     build:
       context: ./celery-worker-svc # local codebase will be used for both celery app and django server app 
       dockerfile: ./Dockerfile
